@@ -11,6 +11,7 @@ export interface UpdateIssueInput {
   title?: string;
   description?: string;
   type?: "bug" | "feature_request";
+  status?: "open" | "in_progress" | "resolved";
 }
 
 // --------- CREATE ---------
@@ -132,6 +133,12 @@ export const updateIssue = async (id: number, input: UpdateIssueInput) => {
     paramIndex++;
   }
 
+  if (input.status !== undefined) {
+    fields.push(`status = $${paramIndex}`);
+    values.push(input.status);
+    paramIndex++;
+  }
+
   fields.push(`updated_at = NOW()`);
   values.push(id);
 
@@ -147,17 +154,16 @@ export const deleteIssue = async (id: number) => {
   await pool.query(`DELETE FROM issues WHERE id = $1`, [id]);
 };
 
-
 export const getMetrics = async () => {
   const totalIssues = await pool.query(`SELECT COUNT(*) FROM issues`);
   const totalUsers = await pool.query(`SELECT COUNT(*) FROM users`);
 
   const byStatus = await pool.query(
-    `SELECT status, COUNT(*) as count FROM issues GROUP BY status`
+    `SELECT status, COUNT(*) as count FROM issues GROUP BY status`,
   );
 
   const byType = await pool.query(
-    `SELECT type, COUNT(*) as count FROM issues GROUP BY type`
+    `SELECT type, COUNT(*) as count FROM issues GROUP BY type`,
   );
 
   return {
