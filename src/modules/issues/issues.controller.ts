@@ -83,7 +83,7 @@ export const getAll = async (
       status as string,
     );
 
-    sendSuccess(res, StatusCodes.OK, "Issues fetched successfully", issues);
+    sendSuccess(res, StatusCodes.OK, "Issues retrived successfully", issues);
   } catch (err) {
     next(err);
   }
@@ -110,7 +110,7 @@ export const getSingle = async (
       return;
     }
 
-    sendSuccess(res, StatusCodes.OK, "Issue fetched successfully", issue);
+    sendSuccess(res, StatusCodes.OK, "Issue retrived successfully", issue);
   } catch (err) {
     next(err);
   }
