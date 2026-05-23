@@ -2,7 +2,7 @@
 
 A RESTful backend API for tracking bugs and feature requests across software teams.
 
-**Live URL:** https://your-deployment-url.onrender.com
+**Live URL:** https://b7-a2-azure.vercel.app
 
 ---
 
@@ -31,8 +31,8 @@ A RESTful backend API for tracking bugs and feature requests across software tea
 
 ### 1. Clone the repository
 
-git clone https://github.com/yourusername/devpulse.git
-cd devpulse
+git clone https://github.com/AananMunna/B7A2.git
+cd B7A2
 
 ### 2. Install dependencies
 
@@ -70,10 +70,10 @@ Tables will be created automatically on first run.
 |--------|----------|--------|-------------|
 | POST | /api/issues | Authenticated | Create a new issue |
 | GET | /api/issues | Public | Get all issues (filter/sort) |
+| GET | /api/issues/metrics | Maintainer | Get system metrics |
 | GET | /api/issues/:id | Public | Get a single issue |
 | PATCH | /api/issues/:id | Authenticated | Update an issue |
 | DELETE | /api/issues/:id | Maintainer | Delete an issue |
-| GET | /api/issues/metrics | Maintainer | Get system metrics |
 
 ### Query Parameters for GET /api/issues
 
