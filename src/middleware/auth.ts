@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { sendError } from "../utils/response";
 import { StatusCodes } from "http-status-codes";
+import { config } from "../config/env";
 
 export interface JwtPayload {
   id: number;
@@ -30,10 +31,7 @@ export const authenticate = (
   }
 
   try {
-    const decode = jwt.verify(
-      token,
-      process.env.JWT_SECRET as string,
-    ) as JwtPayload;
+    const decode = jwt.verify(token, config.jwtSecret) as JwtPayload;
 
     req.user = decode;
     next();
