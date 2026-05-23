@@ -1,6 +1,7 @@
 import pool from "../../config/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { config } from "../../config/env";
 
 export interface RegisterInput {
   name: string;
@@ -55,10 +56,9 @@ export const loginUser = async (input: LoginInput) => {
     throw new Error("INVALID_CREDENTIALS");
   }
 
-
   const token = jwt.sign(
     { id: user.id, name: user.name, role: user.role },
-    process.env.JWT_SECRET as string,
+    config.jwtSecret,
     { expiresIn: "7d" },
   );
 
